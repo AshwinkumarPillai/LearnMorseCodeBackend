@@ -15,9 +15,10 @@ const loginRoutes = require("./routes/user.routes");
 app.use(loginRoutes);
 
 let MONGO_URL = process.env.MONGO_URL;
+const PORT = process.env.PORT || 3100;
 
 mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-  app.listen(3001);
+  app.listen(PORT);
   console.log("Connection established\nStanding by...");
   if (err) console.log("ERROR\n\n\n", err);
 });
