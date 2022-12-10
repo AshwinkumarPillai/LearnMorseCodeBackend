@@ -48,3 +48,16 @@ exports.setLevel = async (req, res) => {
     return res.json({ message: "Internal Server Error", status: 500 });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  try {
+    let { email } = req.body;
+    let user = await User.findOne({ email });
+    if (!user) return res.json({ message: "Email Invalid", status: 404 });
+    await User.findByIdAndDelete(user._id);
+    return res.json({ message: "User Deletion Complete", status: 200 });
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: "Internal Server Error", status: 500 });
+  }
+};
